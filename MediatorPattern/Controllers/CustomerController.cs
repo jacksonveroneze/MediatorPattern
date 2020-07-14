@@ -1,4 +1,5 @@
-﻿using MediatorPattern.Domain.Customer.Command;
+﻿using System;
+using MediatorPattern.Domain.Customer.Command;
 using MediatorPattern.Infra;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -34,7 +35,7 @@ namespace MediatorPattern.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             var dto = new CustomerDeleteCommand { Id = id };
             var result = await _mediator.Send(dto);
@@ -49,7 +50,7 @@ namespace MediatorPattern.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> Get(Guid id)
         {
             var result = await _customerRepository.GetById(id);
             return Ok(result);

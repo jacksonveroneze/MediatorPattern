@@ -2,7 +2,7 @@
 
 namespace MediatorPattern.Domain.Customer.Command
 {
-    public class CustomerCreateCommand : IRequest
+    public class CustomerCreateCommand : IRequest<string>
     {
         public string FirstName { get; set; }
 

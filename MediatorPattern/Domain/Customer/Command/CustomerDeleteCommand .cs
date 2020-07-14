@@ -1,9 +1,10 @@
-﻿using MediatR;
+﻿using System;
+using MediatR;
 
 namespace MediatorPattern.Domain.Customer.Command
 {
-    public class CustomerDeleteCommand : IRequest
+    public class CustomerDeleteCommand : IRequest<string>
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
     }
 }
