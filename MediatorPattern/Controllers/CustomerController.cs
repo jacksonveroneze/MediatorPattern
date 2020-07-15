@@ -23,37 +23,37 @@ namespace MediatorPattern.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(CustomerCreateCommand command)
         {
-            var response = await _mediator.Send(command);
-            return Ok(response);
+            await _mediator.Send(command);
+
+            return NoContent();
         }
 
         [HttpPut]
         public async Task<IActionResult> Put(CustomerUpdateCommand command)
         {
-            var response = await _mediator.Send(command);
-            return Ok(response);
+            await _mediator.Send(command);
+
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
-            var dto = new CustomerDeleteCommand { Id = id };
-            var result = await _mediator.Send(dto);
-            return Ok(result);
+            await _mediator.Send(new CustomerDeleteCommand { Id = id });
+
+            return NoContent();
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _customerRepository.GetAll();
-            return Ok(result);
+            return Ok(await _customerRepository.GetAll());
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            var result = await _customerRepository.GetById(id);
-            return Ok(result);
+            return Ok(await _customerRepository.GetById(id));
         }
     }
 }

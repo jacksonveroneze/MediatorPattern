@@ -1,9 +1,12 @@
-﻿using MediatR;
+﻿using System;
+using MediatR;
 
 namespace MediatorPattern.Domain.Customer.Command
 {
-    public class CustomerCreateCommand : IRequest<string>
+    public class CustomerUpdateCommand : IRequest<CustomerResult>
     {
+        public Guid Id { get; set; }
+        
         public string FirstName { get; set; }
 
         public string LastName { get; set; }

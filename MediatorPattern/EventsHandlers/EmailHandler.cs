@@ -1,20 +1,33 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using MediatorPattern.Notifications;
+using MediatorPattern.Domain.Customer.Command;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace MediatorPattern.EventsHandlers
 {
-    public class EmailHandler : INotificationHandler<CustomerActionNotification>
+    public class EmailHandler : INotificationHandler<CustomerCreateActionNotification>, INotificationHandler<CustomerUpdateActionNotification>
     {
-        public Task Handle(CustomerActionNotification notification, CancellationToken cancellationToken)
+        private readonly ILogger<EmailHandler> _logger;
+
+        public EmailHandler(ILogger<EmailHandler> logger)
+            => _logger = logger;
+
+        public Task Handle(CustomerCreateActionNotification notification, CancellationToken cancellationToken)
         {
-            return Task.Run(() =>
-            {
-                Console.WriteLine("O cliente {0} {1} foi {2} com sucesso", notification.FirstName,
-                    notification.LastName, notification.Action.ToString().ToLower());
-            });
+            _logger.LogInformation("[E-mail] O cliente {0} {1} de código {2} foi criado com sucesso", notification.FirstName,
+                notification.LastName, notification.Id);
+
+            return Task.CompletedTask;
+        }
+
+        public Task Handle(CustomerUpdateActionNotification notification, CancellationToken cancellationToken)
+        {
+            _logger.LogInformation("[E-mail] O cliente {0} {1} de código {2} foi atualizado com sucesso", notification.FirstName,
+                notification.LastName, notification.Id);
+
+            return Task.CompletedTask;
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using MediatR;
 
-namespace MediatorPattern.Notifications
+namespace MediatorPattern.Domain.Customer.Command
 {
-    public class CustomerActionNotification : INotification
+    public class CustomerCreateCommand : IRequest<CustomerResult>
     {
         public string FirstName { get; set; }
 
@@ -10,6 +10,6 @@ namespace MediatorPattern.Notifications
 
         public string Email { get; set; }
 
-        public ActionNotification Action { get; set; }
+        public string Phone { get; set; }
     }
 }

@@ -1,5 +1,5 @@
-﻿using System;
-using MediatorPattern.Domain.Customer.Entity;
+﻿using MediatorPattern.Domain.Customer.Entity;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
